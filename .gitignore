@@ -60,3 +60,7 @@ target/
 
 #Ipython Notebook
 .ipynb_checkpoints
+reports
+env
+DS_Store
+db.sqlite3
