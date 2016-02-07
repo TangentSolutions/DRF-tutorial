@@ -12,5 +12,11 @@ coverage
 responses
 mock
 
+## testing:
+nose
+django_nose
+pinocchio
+nose-html-reporting
+
 gunicorn
 

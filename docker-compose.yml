@@ -2,12 +2,10 @@ db:
   image: postgres
 web:
   build: .
-  command: gunicorn todoapi.wsgi:application -b :8000
+  command: gunicorn todoapi.wsgi:application -b :8000 --reload
   volumes:
     - .:/code
   ports:
     - "8000:8000"
   links:
     - db
-qc:
-  image: codeclimate/codeclimate

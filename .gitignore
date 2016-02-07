@@ -64,3 +64,4 @@ reports
 env
 DS_Store
 db.sqlite3
+static
