@@ -10,6 +10,8 @@ urlpatterns = [
 
     # DRF:
     url(r'^', include(router.urls)),
+    url(r'^explorer/', 
+    	include('rest_framework_swagger.urls', namespace='swagger')),
     url(r'^api-auth/',
         include('rest_framework.urls', namespace='rest_framework'))
 

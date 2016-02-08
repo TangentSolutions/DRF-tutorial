@@ -1,4 +1,5 @@
 from rest_framework import permissions
+from django.http import HttpResponseRedirect 
 
 class IsSelfOrSuperUser(permissions.BasePermission):
     """
@@ -27,3 +28,9 @@ class IsSelfOrSuperUser(permissions.BasePermission):
         	return True
         
         return obj.pk == request.user.pk
+
+
+def swagger_permission_denied_handler(request):
+
+    redirect_url = "/api-auth/login/?next=/explorer/"
+    return HttpResponseRedirect(redirect_url)

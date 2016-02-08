@@ -272,8 +272,30 @@ class PermissionsTestCase(TestCase):
         result = self.perms.has_object_permission(self.mock_request, None, self.superuser)
         assert result is False
 
+class SwaggerLoginRedirect(TestCase):
 
 
+    def setUp(self):
+        self.c = Client()
+        self.explorer_url = '/explorer/'
 
 
+    def test_anon_user_is_redirected(self):
+
+        response = self.c.get(self.explorer_url, follow=True)
+        
+        expected_redirect_chain = ('/api-auth/login/?next=/explorer/', 302)
+        
+        assert response.redirect_chain[0] == expected_redirect_chain, \
+            'Expect 302 Temp redirect to API auth screen. Got: {}' . format (response.redirect_chain)
+
+
+    def test_logged_in_user_is_not_redirected(self):
+
+        user = User.objects.create_user("joe", "joe@soap.com", password="pass")
+        self.c.login(username="joe", password="pass")
+
+        response = self.c.get(self.explorer_url)
+        assert response.status_code == 200, \
+          'Expect a logged-in user to be able to view the explorer. Got: {}' . format (response.status_code)
 

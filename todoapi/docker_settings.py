@@ -22,6 +22,7 @@ DATABASES = {
 # just add here (or use app.py)
 settings.INSTALLED_APPS.extend([
     'rest_framework',
+    'rest_framework_swagger',
     'api',
 ])
 
@@ -32,6 +33,30 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissions'
     ]
+}
+
+SWAGGER_SETTINGS = {
+    'is_authenticated': True,
+    'permission_denied_handler': 'api.permissions.swagger_permission_denied_handler',
+    'info': {
+        'contact': 'team-lead@tangentsolutions.co.za',
+        'title': 'UserService API',
+        'description': """
+Welcome to the docs for the UserService
+
+<h2>Authentication</h2>
+
+<p>This API users TOKEN authentication. 
+Get the token for an existing user, 
+and make sure to add the AUTHORIZATION header to all rquests.
+</p>
+e.g.:<br/>
+<pre><code>curl -X GET http://127.0.0.1:8000/users/ \\
+  -H 'Authorization: Token 1234...'
+</code></pre>
+
+""",        
+    },
 }
 
 # We set the static root to the mapped volume /code
